@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Network Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    
+    <style>
+        /* General Body Styling */
+        body { 
+            font-family: 'Arial', sans-serif; 
+            text-align: center; 
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Headings */
+        h1 {
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Container for the two side-by-side speed maps */
+        .flex-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start;
+            gap: 40px; 
+            margin-bottom: 40px; 
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            flex-wrap: wrap; /* Responsive layout for smaller screens */
+        }
+        
+        /* New Container for 5G Map and Text */
+        .fiveg-story-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap; /* Allow wrapping instead of overlapping */
+            gap: 30px;
+            margin: 20px auto 40px;
+            max-width: 1800px; 
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Visualization containers */
+        #download_vis,
+        #upload_vis {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        /* 5G Map Container Styling */
+        #fiveg_vis {
+            flex: 2 1 0;          /* Allow resizing properly */
+            max-width: 100%;      /* Prevent overflow */
+            overflow: hidden;     /* Hide excess parts */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            box-sizing: border-box; 
+        }
+        
+        /* 5G Text Container Styling */
+        #storytelling-container {
+            flex: 1; 
+            min-width: 350px; 
+            max-width: 450px; 
+            text-align: left;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            box-sizing: border-box; 
+        }
+        
+        #storytelling-container h2 {
+            color: #28a745;
+            margin-top: 0;
+            font-weight: 400;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 5px;
+        }
+        
+        #storytelling-container p {
+            line-height: 1.6;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        #storytelling-container ul {
+            margin-left: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0),
+                rgba(0, 123, 255, 0.75),
+                rgba(0, 0, 0, 0)
+            );
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Global Internet Speeds (Q1 2020)</h1>
+    <div class="flex-container">
+        <div id="download_vis"></div>
+        <div id="upload_vis"></div>
+    </div>
+
+    <hr>
+    <h1>Global 5G Network Coverage</h1>
+    
+    <div class="fiveg-story-container">
+        <div id="fiveg_vis"></div>
+
+        <div id="storytelling-container">
+            <h2>The 5G Revolution🌐</h2>
+            
+            <p>
+                <b>5G (Fifth Generation)</b> wireless technology began its commercial rollout around <b>2019</b>, promising a massive leap over 4G/LTE.
+            </p>
+
+            <p>
+                The dots on the map illustrate this early global deployment phase. <b>Green dots</b> indicate <b>Commercial Availability</b>, showing where carriers have officially launched services to consumers.
+            </p>
+
+            <p>
+                <b>Key improvements over 4G:</b>
+            </p>
+            <ul>
+                <li><b>Peak Speed:</b> Up to 10 Gbps (100x faster).</li>
+                <li><b>Latency:</b> As low as 1 millisecond, crucial for autonomous vehicles and remote surgery.</li>
+                <li><b>Capacity:</b> Ability to connect millions of devices per square kilometer, enabling the massive <b>Internet of Things (IoT)</b>.</li>
+            </ul>
+
+            <p>
+                This map captures the world in a moment of rapid transition, showing which cities and operators were at the forefront of this technological shift.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        vegaEmbed('#download_vis', 'download_map.json').catch(console.error);
+        vegaEmbed('#upload_vis', 'upload_map.json').catch(console.error);
+        vegaEmbed('#fiveg_vis', '5gcoverage.json').catch(console.error);
+    </script>
+
+</body>
+</html>
