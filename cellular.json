@@ -1,0 +1,159 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Postpaid and prepaid mobile plan subscriptions in Malaysia over time.",
+  "data": {
+    "url": "data/cellular_subscribers.csv",
+    "format": {"type": "csv"}
+  },
+  "width": 700,
+  "height": 450,
+  "title": {
+    "text": "Postpaid and Prepaid Subscribers in Malaysia (2004-2021)",
+    "font": "serif",
+    "fontWeight": "bold",
+    "fontSize": 20,
+    "anchor": "start"
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {"start": "2013-01-01", "end": "2014-12-31", "event": "4G Era", "color": "#e3f2fd"},
+          {"start": "2020-01-01", "end": "2021-12-31", "event": "5G Era", "color": "#f3e5f5"}
+        ]
+      },
+      "mark": "rect",
+      "encoding": {
+        "x": {"field": "start", "type": "temporal"},
+        "x2": {"field": "end"},
+        "color": {
+          "field": "color",
+          "type": "nominal",
+          "scale": null,
+          "legend": null
+        },
+        "opacity": {"value": 0.3}
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.plan == 'postpaid' || datum.plan == 'prepaid'"}
+      ],
+      "mark": {
+        "type": "line",
+        "point": true,
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": "Year"
+        },
+        "y": {
+          "field": "subscriptions",
+          "type": "quantitative",
+          "title": "Number of Subscribers"
+        },
+        "color": {
+          "field": "plan",
+          "type": "nominal",
+          "title": "Plan Type",
+          "scale": {
+            "domain": ["postpaid", "prepaid"],
+            "range": ["#0077b6", "#ffb703"]
+          },
+          "legend": {
+            "orient": "top-right",
+            "titleFont": "serif",
+            "labelFont": "sans-serif"
+          }
+        },
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Date"},
+          {"field": "plan", "type": "nominal", "title": "Plan"},
+          {"field": "subscriptions", "type": "quantitative", "title": "Subscribers"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2013-01-01", "label": "4G Era", "y": 38000000}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#1976d2",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2013-01-01", "label": "4G Era", "y": 38000000}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -5,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#1976d2"
+      },
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2020-01-01", "label": "5G Era", "y": 32000000}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#7b1fa2",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2020-01-01", "label": "5G Era", "y": 32000000}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -5,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#7b1fa2"
+      },
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"labelFont": "sans-serif", "titleFont": "serif"},
+    "background": "#f8f9fa"
+  }
+}

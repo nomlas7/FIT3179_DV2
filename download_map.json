@@ -1,63 +1,82 @@
 {
-    "config": {
-        "view": {
-            "continuousWidth": 300,
-            "continuousHeight": 300
-        }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+  "title": "Global Download Speeds 2020",
+  "width": 450,
+  "height": 400,
+  "config": {
+    "view": {
+      "continuousWidth": 300,
+      "continuousHeight": 300
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#cce5ff"
+      }
     },
-    "data": {
+    {
+      "data": {
+        "graticule": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#888888",
+        "strokeDash": [3, 3],
+        "strokeWidth": 0.3,
+        "opacity": 0.4
+      }
+    },
+    {
+      "data": {
         "url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json",
         "format": {
-            "feature": "countries",
-            "type": "topojson"
+          "type": "topojson",
+          "feature": "countries"
         }
-    },
-    "mark": {
-        "type": "geoshape",
-        "stroke": "white",
-        "strokeWidth": 0.5
-    },
-    "encoding": {
-        "color": {
-            "condition": {
-                "test": "datum.download_mbps !== null",
-                "field": "download_mbps",
-                "scale": {
-                    "scheme": "tealblues"
-                },
-                "title": "Avg. Download (Mbps)",
-                "type": "quantitative"
-            },
-            "value": "#e0e0e0"
-        },
-        "tooltip": [{
-            "field": "country_name",
-            "title": "Country",
-            "type": "nominal"
-        }, {
-            "field": "download_mbps",
-            "format": ".2f",
-            "title": "Avg. Download",
-            "type": "quantitative"
-        }]
-    },
-    "height": 500,
-    "projection": {
-        "type": "mercator"
-    },
-    "title": "Download Speeds",
-    "transform": [{
-        "lookup": "id",
-        "from": {
+      },
+      "transform": [
+        {
+          "lookup": "id",
+          "from": {
             "data": {
-                "name": "data-0d79c13841d81524131ceca720ecd61d"
+              "name": "data-0d79c13841d81524131ceca720ecd61d"
             },
             "key": "id",
             "fields": ["country_name", "download_mbps"]
+          }
         }
-    }],
-    "width": 900,
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "datum.download_mbps !== null",
+            "field": "download_mbps",
+            "type": "quantitative",
+            "scale": {"scheme": "tealblues"},
+            "title": "Average Download Speed (Mbps)"
+          },
+          "value": "#e0e0e0"
+        },
+        "tooltip": [
+          {"field": "country_name", "title": "Country"},
+          {"field": "download_mbps", "title": "Average Download Speed", "format": ".2f"}
+        ]
+      }
+    }
+  ],
     "datasets": {
         "data-0d79c13841d81524131ceca720ecd61d": [{
             "id": 4,

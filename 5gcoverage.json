@@ -39,8 +39,8 @@
       },
       "mark": {
         "type": "circle",
-        "opacity": 0.7,
-        "size": 30
+        "opacity": 0.5,
+        "size": 15
       },
       "encoding": {
         "color": {
@@ -54,7 +54,7 @@
               "Limited Availability",
               "Pre-Release"
             ],
-            "range": ["#00A86B", "#FFBF00", "#800517"]
+            "range": ["#00A86B", "#FFBF00", "#0000FF"]
           },
           "type": "nominal"
         },
