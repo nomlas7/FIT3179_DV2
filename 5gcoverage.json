@@ -12,7 +12,32 @@
   },
   "width": "container",
   "height": "container",
+  "projection": {
+    "type": "mercator"
+  },
   "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#cce5ff"
+      }
+    },
+    {
+      "data": {
+        "graticule": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#888888",
+        "strokeDash": [3, 3],
+        "strokeWidth": 0.3,
+        "opacity": 0.4,
+        "filled": false
+      }
+    },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/world-110m.json",
@@ -25,9 +50,6 @@
         "type": "geoshape",
         "fill": "lightgray",
         "stroke": "white"
-      },
-      "projection": {
-        "type": "mercator"
       }
     },
     {
